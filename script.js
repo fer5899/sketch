@@ -25,12 +25,14 @@ function createGrid(gridSize, gridContainer, withBorder) {
 
 }
 
-
 const gridContainer = document.querySelector("#grid-container");
+const gridToggleButton = document.querySelector("#toggle-grid");
+const clearCanvasButton = document.querySelector("#clear-canvas");
+const gridSizeSlider = document.querySelector("#grid-size-slider");
+const sliderValueText = document.querySelector("#slider-value");
 
-createGrid(8, gridContainer, true);
-
-document.addEventListener("mousedown", e => console.log(e));
+createGrid(16, gridContainer, true);
+sliderValueText.textContent = `Grid size ${gridSizeSlider.value}x${gridSizeSlider.value}`;
 
 document.addEventListener("mousemove", e => {
     if(e.buttons === 0) return;
@@ -43,3 +45,21 @@ document.addEventListener("mousemove", e => {
     }
     
 });
+
+gridToggleButton.addEventListener("click", () => 
+    gridContainer.childNodes.forEach(square => 
+        square.classList.toggle("border")));
+
+clearCanvasButton.addEventListener("click", () =>
+    gridContainer.childNodes.forEach(square =>
+        square.style.backgroundColor = null));
+
+gridSizeSlider.addEventListener("change", () => {
+    let sliderValue = gridSizeSlider.value;
+    let oldSize = gridContainer.childElementCount; 
+    sliderValueText.textContent = `Grid size ${sliderValue}x${sliderValue}`;
+    for(let i = 0; i < oldSize; i++) {
+        gridContainer.removeChild(gridContainer.firstChild);
+    }
+    createGrid(sliderValue, gridContainer, true);
+    });

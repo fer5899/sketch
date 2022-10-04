@@ -12,7 +12,23 @@
     
     <div id="main-title">Sketch it up!</div>
 
-    <div id="grid-container" class="border"></div>
+
+    <div id="workspace">
+        <div id="toolbox">
+            <button id="toggle-grid">Toggle grid</button>
+            <button id="clear-canvas">Clear canvas</button>
+            <div id="slide-container">
+                <input type="range" min="8" max="96" step="8"
+                        value="16" class="slider" id="grid-size-slider">
+                <div id="slider-value"></div>
+            </div>
+        </div>
+    
+        <div id="grid-container" class="border"></div>
+
+        
+    </div>
+    
 
 </body>
 </html>
