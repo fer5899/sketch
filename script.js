@@ -25,8 +25,13 @@ function createGrid(gridSize, gridContainer, withBorder) {
 
 }
 
+function getRandomColor() {
+    return Math.floor(Math.random()*16777215).toString(16);
+}
+
 const gridContainer = document.querySelector("#grid-container");
-const gridToggleButton = document.querySelector("#toggle-grid");
+const toggleGridButton = document.querySelector("#toggle-grid");
+const rainbowButton = document.querySelector("#toggle-rainbow");
 const clearCanvasButton = document.querySelector("#clear-canvas");
 const gridSizeSlider = document.querySelector("#grid-size-slider");
 const sliderValueText = document.querySelector("#slider-value");
@@ -38,7 +43,11 @@ document.addEventListener("mousemove", e => {
     if(e.buttons === 0) return;
     if (e.target.parentNode === gridContainer) {
         if (e.buttons === 1) {
-            e.target.style.backgroundColor = "black";
+            if(rainbowButton.classList.contains("pressed")) {
+                e.target.style.backgroundColor = "#" + getRandomColor();
+            } else {
+                e.target.style.backgroundColor = "black";
+            }
         } else if (e.buttons === 4) {
             e.target.style.backgroundColor = null;
         }
@@ -46,20 +55,27 @@ document.addEventListener("mousemove", e => {
     
 });
 
-gridToggleButton.addEventListener("click", () => 
+toggleGridButton.addEventListener("click", () => 
     gridContainer.childNodes.forEach(square => 
-        square.classList.toggle("border")));
+        square.classList.toggle("border"))
+);
+
+rainbowButton.addEventListener("click", () => {
+    rainbowButton.classList.toggle("pressed");
+});
 
 clearCanvasButton.addEventListener("click", () =>
     gridContainer.childNodes.forEach(square =>
-        square.style.backgroundColor = null));
+        square.style.backgroundColor = null)
+);
 
 gridSizeSlider.addEventListener("change", () => {
-    let sliderValue = gridSizeSlider.value;
-    let oldSize = gridContainer.childElementCount; 
-    sliderValueText.textContent = `Grid size ${sliderValue}x${sliderValue}`;
-    for(let i = 0; i < oldSize; i++) {
-        gridContainer.removeChild(gridContainer.firstChild);
+        let sliderValue = gridSizeSlider.value;
+        let oldSize = gridContainer.childElementCount; 
+        sliderValueText.textContent = `Grid size ${sliderValue}x${sliderValue}`;
+        for(let i = 0; i < oldSize; i++) {
+            gridContainer.removeChild(gridContainer.firstChild);
+        }
+        createGrid(sliderValue, gridContainer, true);
     }
-    createGrid(sliderValue, gridContainer, true);
-    });
+);
