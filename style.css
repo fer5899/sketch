@@ -1,5 +1,6 @@
 body {
     box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .border {
@@ -52,6 +53,12 @@ body {
     cursor: pointer; /* Cursor on hover */
 }
 
+#main-title {
+    font-size: 24px;
+    padding: 20px 20px 0px;
+    display: inline-block;
+}
+
 #workspace {
     display: flex;
     justify-content: center;
@@ -69,8 +76,8 @@ body {
 #grid-container {
     display: flex;
     flex-wrap: wrap;
-    width: 600px;
-    height: 600px;
+    width: 500px;
+    height: 500px;
     background-color: white;
 }
 
@@ -79,4 +86,5 @@ body {
     flex-direction: column;
     gap: 20px;
 }
+
 
