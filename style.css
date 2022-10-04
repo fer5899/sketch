@@ -71,6 +71,7 @@ body {
     flex-wrap: wrap;
     width: 600px;
     height: 600px;
+    background-color: white;
 }
 
 #slide-container {
